@@ -1,16 +1,16 @@
+
 -- Add a new widget here
-local taglist	= require ("taglist")
-local tasklist	= require ("tasklist")
-local systray	= require ("systray")
-local textclock	= require ("textclock")
+local taglist	= require ("taglist.taglist")
+local tasklist	= require ("tasklist.tasklist")
+local systray	= require ("systray.systray")
+local textclock	= require ("clock.textclock")
 
--- Organise your widgets here
 local widgets = {}
-
--- ----------------------------
--- For each screen, init Tasks:
--- ----------------------------
+-- ------------------------------
+-- For each screen, init widgets:
+-- ------------------------------
 for s = 1, screen.count() do
+  -- Organise your widgets here
   widgets[s] =
   {
 	{

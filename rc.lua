@@ -10,40 +10,21 @@ main_directory = "jesro"
 -- lua files
 themeName = "vaapad"
 
-home_directory = os.getenv("HOME")
+require("debug")
+local source_info					= debug.getinfo(1,'S').source
+local type_char, path, filename		= string.match(source_info, "(@)(.+)(rc.lua)")
+main_path							= path .. main_directory
+theme_path							= main_path	.. "/themes/" .. themeName
+module_path							= main_path	.. "/modules"
 
-local main_path		= home_directory	.. "/.config/awesome/"	.. main_directory
-local theme_path	= main_path			.. "/"					.. themeName
-
-package.path = package.path .. ";"	.. main_path	.. "/.utils/?.lua"
-package.path = package.path .. ";"	.. theme_path	.. "/config/?.lua"
-
--- Notification & Mandatory Packages
-require ("awful")
-require ("awful.autofocus")
-require ("awful.rules")
-require ("naughty")
-require ("beautiful")
+-- Init Module path
+package.path = package.path .. ";"	.. module_path	.. "/?.lua"
+package.path = package.path .. ";"	.. theme_path	.. "/?.lua"
 
 -- Utility Packages
-require ("util")
-require ("meta")
-require ("awdebug")
+require ("utils.util")
+require ("utils.meta")
+require ("utils.awdebug")
 
--- Config Packages
-require	("general")
-require ("startup_error")
-require ("runtime_error")
 
--- Theme and Bar/Widgets conf
-require ("theme_module")
-require	("layout")
-require ("top_bar")
-
--- Bindings and Behavior
-require	("tags")
-require ("keybinding")
-require ("clientbuttons")
-require ("generalbuttons")
-require ("rules")
-require ("signal")
+require ("config")

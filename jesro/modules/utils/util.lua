@@ -1,5 +1,7 @@
 util = {}
 
+local package_path_save = package.path
+
 function util.executionLocation()
   local res = os.execute("pwd > /tmp/.awesome.jesro")
   if res == 0 then
@@ -23,7 +25,25 @@ end
 
 function util.background(fileName)
   res = util.env("HOME") .. "/.config/awesome/" .. main_directory .. "/" .. themeName .. "/wallpapers/" .. fileName
-  print (res)
+  return res
+end
+
+function util.set_package_path(new_path)
+  package_path_save = package.path
+  if new_path ~= nil then
+	package.path = new_path
+  end
+end
+
+function util.restore_package_path()
+  package.path = package_path_save
+end
+
+function util.saferequire(module_path, module_name)
+  local save = package.path
+  package.path = module_path
+  res = require (module_name)
+  package.path = save
   return res
 end
 
