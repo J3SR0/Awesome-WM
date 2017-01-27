@@ -15,7 +15,14 @@ bars = {}
 -- --------------------------
 for s = 1, screen.count() do
   -- create the bar
-  bars[s] = awful.wibox({ position = "top", screen = s })
+  bars[s] = awful.wibox(
+  { 
+	screen = s,
+	position = "top", 
+	height = "17",
+	border_width = "1",
+	border_color = "#000000"
+  })
 
   -- fill bar with widget
   bars[s].widgets = widgets[s]
